@@ -12,6 +12,7 @@ export const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middleware),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 sagaMiddleware.run(rootSaga);
