@@ -10,23 +10,31 @@ const AddPlaylistButton: FC = (): ReactElement => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
+    const [error, setError] = useState<boolean>(false);
+
     const user_id = useSelector(authSelectors.getUser)?.userId;
     const accessToken = useSelector(authSelectors.getAccessToken);
 
     const handleSubmit = async () => {
-        setOpen(false);
-
         if(title.trim() === '') {
+            setError(true);
             return;
         }
-
-        console.log('title', title);
 
         playlistService.addNewPlaylist({
             name: title,
             description: description
         }, user_id, accessToken);
 
+        setOpen(false);
+        setTitle('');
+        setDescription('');
+        setError(false);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+        setError(false);
         setTitle('');
         setDescription('');
     }
@@ -35,7 +43,7 @@ const AddPlaylistButton: FC = (): ReactElement => {
         <div>
             <button onClick={() => setOpen(true)} className="px-5 py-2 rounded-lg text-white bg-green">Add new playlist</button>
 
-            { open && <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" onClick={() => setOpen(false)}>
+            { open && <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                 <div className="fixed inset-0 bg-gray bg-opacity-15 transition-opacity" aria-hidden="true"></div>
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                     <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -44,10 +52,11 @@ const AddPlaylistButton: FC = (): ReactElement => {
                                 <div className="sm:flex sm:items-start">
                                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                         <h3 className="text-2xl font-semibold leading-6" id="modal-title">Add new playlist</h3>
+                                        { error && <p className="text-red font-semibold text-sm mt-5">Playlist name is required</p> }
                                         <div className="mt-5">
                                             <input type="text" 
                                                 placeholder="Playlist name" 
-                                                className="min-w-72 w-full px-3 py-2 rounded-lg border" 
+                                                className={"min-w-72 w-full px-3 py-2 rounded-lg border" + (error ? ' border-red' : '')}
                                                 value={title}
                                                 onChange={(event) => setTitle(event.target.value)}
                                             />
@@ -69,7 +78,7 @@ const AddPlaylistButton: FC = (): ReactElement => {
                             </button>
                             <button type="button" 
                                 className="mt-3 inline-flex w-full justify-center rounded-md bg-red px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-red hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                                onClick={() => setOpen(false)}
+                                onClick={() => handleClose()}
                             >
                                 Cancel
                             </button>
