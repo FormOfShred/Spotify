@@ -38,13 +38,13 @@ const Search: FC = (): ReactElement => {
             <form className="flex gap-5" onSubmit={handleSubmit}>
                 <input type="text" 
                     placeholder="Search for a track" 
-                    className={"min-w-48 md:min-w-96 w-4/5 ps-3 rounded-full"}
+                    className={"min-w-48 md:min-w-96 w-4/5 ps-3 rounded-lg"}
                     value={track}
                     onChange={(event) => setTrack(event.target.value)}
                     
                  />
                 <button type="submit" 
-                    className="px-5 py-2 rounded-full text-white bg-green"
+                    className="px-5 py-2 rounded-lg text-white bg-green"
                 >
                         Search
                 </button>
