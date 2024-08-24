@@ -17,8 +17,8 @@ const App: FC = (): ReactElement => {
   console.log(user);
 
   return (
-    <div className="mx-auto">
-      <div className="d-flex justify-content-between m-5">
+    <div className="App">
+      <div className="flex justify-between m-10 flex-wrap gap-3">
         <Search />
         <AddPlaylistButton />
       </div>
