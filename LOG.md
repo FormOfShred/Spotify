@@ -13,3 +13,4 @@ This is a log to keep track of what I completed and on what day I completed it. 
 
 - Use Postman to play with Spotify API 
 - Install Tailwind
+- Added search bar and add new playlist button (UI)
