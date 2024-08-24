@@ -8,6 +8,7 @@ import logo from "./logo.svg";
 
 import Search from "./components/Search";
 import AddPlaylistButton from "./components/AddPlaylistButton";
+import PlaylistsDropdown from "./components/PlaylistsDropdown";
 
 const App: FC = (): ReactElement => {
   const dispatch = useDispatch();
@@ -17,10 +18,14 @@ const App: FC = (): ReactElement => {
   console.log(user);
 
   return (
-    <div className="App">
-      <div className="flex justify-between m-10 flex-wrap gap-3">
+    <div className="flex flex-col gap-10 m-10">
+      <div className="flex justify-between flex-wrap gap-3">
         <Search />
         <AddPlaylistButton />
+      </div>
+      <div className="flex gap-10 flex-wrap">
+        <PlaylistsDropdown />
+        <p className="text-white">Description</p>
       </div>
     </div>
   );

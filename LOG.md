@@ -20,3 +20,6 @@ This is a log to keep track of what I completed and on what day I completed it. 
 - Added search bar and add new playlist button (UI)
 - Connect search bar and Spotify API
 - Connect add new playlist and Spotify API
+- Fetch playlists
+
+## 25/08

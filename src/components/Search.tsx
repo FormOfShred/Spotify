@@ -18,6 +18,7 @@ const Search: FC = (): ReactElement => {
         if(track.trim() === '') {
             setError(true);
             console.log('error', error);
+            setFoundTracks([]);
             return;
         }
 
@@ -42,7 +43,8 @@ const Search: FC = (): ReactElement => {
                     value={track}
                     onChange={(event) => setTrack(event.target.value)}
                     
-                 />
+                >
+                </input>
                 <button type="submit" 
                     className="px-5 py-2 rounded-lg text-white bg-green"
                 >
