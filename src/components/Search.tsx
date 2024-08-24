@@ -1,6 +1,6 @@
 import { FC, ReactElement, useState } from 'react';
 import {  } from '../containers/auth/slice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { authSelectors } from '../containers/auth/selectors';
 
 import searchService from '../services/search';
@@ -10,7 +10,6 @@ const Search: FC = (): ReactElement => {
     const [foundTracks, setFoundTracks] = useState<any[]>([]);
     const [error, setError] = useState<boolean>(false);
 
-    const dispatch = useDispatch();
     const accessToken = useSelector(authSelectors.getAccessToken);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,11 +34,11 @@ const Search: FC = (): ReactElement => {
     }
     
     return (
-        <div className="md:min-w-min w-6/12">
+        <div className="min-w-min w-6/12">
             <form className="flex gap-5" onSubmit={handleSubmit}>
                 <input type="text" 
                     placeholder="Search for a track" 
-                    className={"min-w-48 md:min-w-96 w-4/5 ps-3 rounded-full" + (error ? 'border border-red rounded-full' : '')}
+                    className={"min-w-48 md:min-w-96 w-4/5 ps-3 rounded-full"}
                     value={track}
                     onChange={(event) => setTrack(event.target.value)}
                     
