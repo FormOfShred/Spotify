@@ -2,13 +2,21 @@ export interface Playlist {
     id?: string;
     name: string;
     description?: string;
-    tracks?: Track[];
+    tracks?: {
+        items: Track[];
+    };
 }
 
 export interface Track {
-    id: string;
-    name: string;
-    artist: string;
-    album: string;
-    duration: number;
+    track: {
+        id: string;
+        name: string;
+        artists: [{ name: string }];
+        album: {
+            images: [{ url: string }];
+            name: string;
+            release_date: string;
+        };
+        
+    }
 }

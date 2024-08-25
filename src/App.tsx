@@ -4,12 +4,14 @@ import React, { FC, ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { authSelectors } from "./containers/auth/selectors";
+import { playlistSelectors } from "./containers/playlists/selectors";
 import logo from "./logo.svg";
 
 import Search from "./components/Search";
 import AddPlaylistButton from "./components/AddPlaylistButton";
 import PlaylistsDropdown from "./components/PlaylistsDropdown";
-import { playlistSelectors } from "./containers/playlists/selectors";
+import TrackList from "./components/TrackList";
+
 
 const App: FC = (): ReactElement => {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const App: FC = (): ReactElement => {
         <PlaylistsDropdown />
         <p className="text-white md:w-1/3 lg:w-1/2">{selectedPlaylist?.description}</p>
       </div>
+      <TrackList />
     </div>
   );
 };
