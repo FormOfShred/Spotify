@@ -1,5 +1,5 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { Playlist, Track } from "../../types/playlists";
+import { Playlist } from "../../types/playlists";
 import { ErrorPayload, RequestStatus } from "../../types/requests";
 
 export interface PlaylistsState {
@@ -18,6 +18,12 @@ export const getPlaylists = createAction("playlist/getPlaylists");
 export const getPlaylistsSuccess = createAction<Playlist[]>("playlist/getPlaylistsSuccess");
 export const getPlaylistsFailed = createAction<ErrorPayload>("playlist/getPlaylistsFailed");
 
+export const createPlaylist = createAction("playlist/createPlaylist", (name: string, description: string) => ({
+    payload: { name, description },
+}));
+export const createPlaylistSuccess = createAction<Playlist>("playlist/createPlaylistSuccess");
+export const createPlaylistFailed = createAction<ErrorPayload>("playlist/createPlaylistFailed");
+
 const playlistSlice = createSlice({
     name: "playlist",
     initialState,
@@ -33,6 +39,17 @@ const playlistSlice = createSlice({
                 state.status = RequestStatus.SUCCESS;
             })
             .addCase(getPlaylistsFailed, (state, action) => {
+                state.status = RequestStatus.ERROR;
+                state.error = action.payload.message;
+            })
+            .addCase(createPlaylist, (state) => {
+                state.status = RequestStatus.PENDING;
+            })
+            .addCase(createPlaylistSuccess, (state, action) => {
+                state.playlists.push(action.payload);
+                state.status = RequestStatus.SUCCESS;
+            })
+            .addCase(createPlaylistFailed, (state, action) => {
                 state.status = RequestStatus.ERROR;
                 state.error = action.payload.message;
             });

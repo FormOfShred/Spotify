@@ -1,19 +1,22 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authSelectors } from "../containers/auth/selectors";
 import { playlistSelectors } from "../containers/playlist/selectors";
 import { getPlaylists } from "../containers/playlist/slice";
 
 const PlaylistsDropdown: FC = (): ReactElement => {
     const [open, setOpen] = useState<boolean>(false);
-    const [chosenPlaylist, setChosenPlaylist] = useState<string>('');
 
     const playlists = useSelector(playlistSelectors.getPlaylists);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getPlaylists());
-    }, [dispatch]);
+    const handleClick = () => {
+        setOpen(!open);
+
+        if(!open) {
+            dispatch(getPlaylists());
+        }
+        
+    }
 
     return (
        <div>
@@ -23,7 +26,7 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                 </button>
                 <button 
                     className="px-5 py-2 rounded-e-lg text-white bg-green"
-                    onClick={() => setOpen(!open)}
+                    onClick={handleClick}
                 >
                     { open ? 
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -41,7 +44,6 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                     playlists.map((playlist) => (
                         <div key={playlist.id} 
                             className="bg-white my-0.5 rounded-lg cursor-pointer flex items-center"
-                            onClick={() => setChosenPlaylist(playlist.name)}
                         >
                             <p className="p-5">
                                 {playlist.name}

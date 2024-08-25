@@ -1,8 +1,6 @@
 import { FC, ReactElement, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { authSelectors } from '../containers/auth/selectors';
-
-import playlistService from '../services/playlist';
+import { createPlaylist } from '../containers/playlist/slice';
+import { useDispatch } from 'react-redux';
 
 const AddPlaylistButton: FC = (): ReactElement => {
     const [open, setOpen] = useState<boolean>(false);
@@ -12,8 +10,7 @@ const AddPlaylistButton: FC = (): ReactElement => {
 
     const [error, setError] = useState<boolean>(false);
 
-    const user_id = useSelector(authSelectors.getUser)?.userId;
-    const accessToken = useSelector(authSelectors.getAccessToken);
+    const dispatch = useDispatch();
 
     const handleSubmit = async () => {
         if(title.trim() === '') {
@@ -21,10 +18,11 @@ const AddPlaylistButton: FC = (): ReactElement => {
             return;
         }
 
-        playlistService.addNewPlaylist({
-            name: title,
-            description: description
-        }, user_id, accessToken);
+        try {
+            dispatch(createPlaylist(title, description));
+        } catch (error) {
+            console.log('error', error);
+        }
 
         setOpen(false);
         setTitle('');
