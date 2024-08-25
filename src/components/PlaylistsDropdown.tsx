@@ -1,30 +1,19 @@
 import { FC, ReactElement, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authSelectors } from "../containers/auth/selectors";
+import { playlistSelectors } from "../containers/playlist/selectors";
+import { getPlaylists } from "../containers/playlist/slice";
 
 const PlaylistsDropdown: FC = (): ReactElement => {
     const [open, setOpen] = useState<boolean>(false);
-    const [playlists, setPlaylists] = useState<any[]>([]);
     const [chosenPlaylist, setChosenPlaylist] = useState<string>('');
 
-    const user_id = useSelector(authSelectors.getUser)?.userId;
-    const accessToken = useSelector(authSelectors.getAccessToken);
+    const playlists = useSelector(playlistSelectors.getPlaylists);
+    const dispatch = useDispatch();
 
-    const handleClick = async () => {
-        setOpen(!open);
-
-        if(!open) {
-            console.log('fetch playlists');
-            const response = await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
-            const data = await response.json();
-            console.log(data.items);
-            setPlaylists(data.items);
-        }
-    }
+    useEffect(() => {
+        dispatch(getPlaylists());
+    }, [dispatch]);
 
     return (
        <div>
@@ -34,7 +23,7 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                 </button>
                 <button 
                     className="px-5 py-2 rounded-e-lg text-white bg-green"
-                    onClick={handleClick}
+                    onClick={() => setOpen(!open)}
                 >
                     { open ? 
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -48,13 +37,12 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                 </button>
             </div>
             <div className="mt-1">
-                { open && 
+                { open &&
                     playlists.map((playlist) => (
                         <div key={playlist.id} 
                             className="bg-white my-0.5 rounded-lg cursor-pointer flex items-center"
                             onClick={() => setChosenPlaylist(playlist.name)}
                         >
-                            <img src={playlist.images[0].url} alt={playlist.name} className="w-16 h-16 rounded-lg" />
                             <p className="p-5">
                                 {playlist.name}
                             </p>
