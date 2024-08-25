@@ -34,7 +34,7 @@ function* createPlaylistSaga(action: ReturnType<typeof createPlaylist>) {
         const request = () => axios.post<any>(`https://api.spotify.com/v1/users/${userId}/playlists`, {
             name: action.payload.name,
             description: action.payload.description,
-            public: false,
+            public: action.payload.publicPlaylist,
         }, {
             headers: { Authorization: `Bearer ${accessToken}` },
         });

@@ -7,6 +7,7 @@ const AddPlaylistButton: FC = (): ReactElement => {
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+    const [publicPlaylist, setPublicPlaylist] = useState<boolean>(false);
 
     const [error, setError] = useState<boolean>(false);
 
@@ -19,7 +20,7 @@ const AddPlaylistButton: FC = (): ReactElement => {
         }
 
         try {
-            dispatch(createPlaylist(title, description));
+            dispatch(createPlaylist(title, description, publicPlaylist));
         } catch (error) {
             console.log('error', error);
         }
@@ -27,7 +28,9 @@ const AddPlaylistButton: FC = (): ReactElement => {
         setOpen(false);
         setTitle('');
         setDescription('');
+        setPublicPlaylist(false);
         setError(false);
+        
     }
 
     const handleClose = () => {
@@ -35,6 +38,7 @@ const AddPlaylistButton: FC = (): ReactElement => {
         setError(false);
         setTitle('');
         setDescription('');
+        setPublicPlaylist(false);
     }
     
     return (
@@ -63,6 +67,14 @@ const AddPlaylistButton: FC = (): ReactElement => {
                                                 value={description}
                                                 onChange={(event) => setDescription(event.target.value)}
                                             />
+                                            <div className="flex gap-3 mt-2">
+                                                <p className="text-lg font-semibold">public</p>
+                                                <input 
+                                                    type="checkbox" className="mt-1"
+                                                    checked={publicPlaylist}
+                                                    onChange={(event) => setPublicPlaylist(event.target.checked)}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

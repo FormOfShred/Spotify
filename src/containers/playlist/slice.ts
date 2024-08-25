@@ -18,8 +18,8 @@ export const getPlaylists = createAction("playlist/getPlaylists");
 export const getPlaylistsSuccess = createAction<Playlist[]>("playlist/getPlaylistsSuccess");
 export const getPlaylistsFailed = createAction<ErrorPayload>("playlist/getPlaylistsFailed");
 
-export const createPlaylist = createAction("playlist/createPlaylist", (name: string, description: string) => ({
-    payload: { name, description },
+export const createPlaylist = createAction("playlist/createPlaylist", (name: string, description: string, publicPlaylist: boolean) => ({
+    payload: { name, description, publicPlaylist },
 }));
 export const createPlaylistSuccess = createAction<Playlist>("playlist/createPlaylistSuccess");
 export const createPlaylistFailed = createAction<ErrorPayload>("playlist/createPlaylistFailed");

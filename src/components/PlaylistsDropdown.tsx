@@ -18,6 +18,12 @@ const PlaylistsDropdown: FC = (): ReactElement => {
         
     }
 
+    useEffect(() => {
+        if(open) {
+            dispatch(getPlaylists());
+        }
+    }, [open]);
+
     return (
        <div>
             <div className="flex">
