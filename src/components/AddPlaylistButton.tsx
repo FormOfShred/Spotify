@@ -1,5 +1,5 @@
 import { FC, ReactElement, useState } from 'react';
-import { createPlaylist } from '../containers/playlist/slice';
+import { createPlaylist } from '../containers/playlists/slice';
 import { useDispatch } from 'react-redux';
 
 const AddPlaylistButton: FC = (): ReactElement => {

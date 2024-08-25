@@ -52,7 +52,7 @@ const Search: FC = (): ReactElement => {
                 </button>
             </form>
 
-            <div className="absolute mt-1 min-w-72">
+            <div className="absolute mt-1 min-w-72 z-20">
                 {foundTracks.map((track) => (
                     <div key={track.id} className="bg-white rounded-lg my-0.5 gap-2 flex items-center justify-between">
                         <div className="flex items-center gap-5">

@@ -1,21 +1,33 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { playlistSelectors } from "../containers/playlist/selectors";
-import { getPlaylists } from "../containers/playlist/slice";
+import { playlistSelectors } from "../containers/playlists/selectors";
+import { getPlaylists, getPlaylist } from "../containers/playlists/slice";
+import { Playlist } from "../types/playlists";
 
 const PlaylistsDropdown: FC = (): ReactElement => {
     const [open, setOpen] = useState<boolean>(false);
 
     const playlists = useSelector(playlistSelectors.getPlaylists);
+    //const playlist = useSelector(playlistSelectors.getPlaylist);
     const dispatch = useDispatch();
 
-    const handleClick = () => {
+    //console.log('pl', playlist)
+
+    const handleDropdown = () => {
         setOpen(!open);
 
         if(!open) {
             dispatch(getPlaylists());
         }
         
+    }
+
+    const handleChoosePlaylist = (playlist: Playlist) => {
+        setOpen(false);
+
+        if(playlist.id) {
+            dispatch(getPlaylist(playlist.id));
+        }
     }
 
     useEffect(() => {
@@ -26,13 +38,13 @@ const PlaylistsDropdown: FC = (): ReactElement => {
 
     return (
        <div>
-            <div className="flex relative">
+            <div className="flex">
                 <button className="min-w-[15rem] sm:min-w-[25rem] px-5 py-2 rounded-s-lg text-white bg-green cursor-default">
-                    Playlist name
+                    Choose a playlist
                 </button>
                 <button 
                     className="px-5 py-2 w-[4rem] rounded-e-lg text-white bg-green"
-                    onClick={handleClick}
+                    onClick={handleDropdown}
                 >
                     { open ? 
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -45,11 +57,12 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                     }
                 </button>
             </div>
-            <div className="mt-1 absolute min-w-[19rem] sm:min-w-[29rem]">
+            <div className="mt-1 absolute min-w-[19rem] sm:min-w-[29rem] z-10">
                 { open &&
                     playlists.map((playlist) => (
                         <div key={playlist.id} 
                             className="bg-white my-0.5 rounded-lg cursor-pointer flex items-center"
+                            onClick={() => handleChoosePlaylist(playlist)}
                         >
                             <p className="p-3">
                                 {playlist.name}

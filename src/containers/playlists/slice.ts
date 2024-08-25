@@ -8,6 +8,12 @@ export interface PlaylistsState {
     error?: string;
 }
 
+export interface PlaylistState {
+    playlist: Playlist;
+    status: RequestStatus;
+    error?: string;
+}
+
 const initialState: PlaylistsState = {
     playlists: [],
     status: RequestStatus.IDLE,
@@ -23,6 +29,13 @@ export const createPlaylist = createAction("playlist/createPlaylist", (name: str
 }));
 export const createPlaylistSuccess = createAction<Playlist>("playlist/createPlaylistSuccess");
 export const createPlaylistFailed = createAction<ErrorPayload>("playlist/createPlaylistFailed");
+
+export const getPlaylist = createAction("playlist/getPlaylist", (playlistId: string) => ({
+    payload: { playlistId },
+}));
+export const getPlaylistSuccess = createAction<Playlist>("playlist/getPlaylistSuccess");
+export const getPlaylistFailed = createAction<ErrorPayload>("playlist/getPlaylistFailed");
+
 
 const playlistSlice = createSlice({
     name: "playlist",
