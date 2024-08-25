@@ -26,12 +26,12 @@ const PlaylistsDropdown: FC = (): ReactElement => {
 
     return (
        <div>
-            <div className="flex">
-                <button className="min-w-48 md:min-w-96 px-5 py-2 rounded-s-lg text-white bg-green cursor-default">
+            <div className="flex relative">
+                <button className="min-w-[15rem] sm:min-w-[25rem] px-5 py-2 rounded-s-lg text-white bg-green cursor-default">
                     Playlist name
                 </button>
                 <button 
-                    className="px-5 py-2 rounded-e-lg text-white bg-green"
+                    className="px-5 py-2 w-[4rem] rounded-e-lg text-white bg-green"
                     onClick={handleClick}
                 >
                     { open ? 
@@ -45,13 +45,13 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                     }
                 </button>
             </div>
-            <div className="mt-1">
+            <div className="mt-1 absolute min-w-[19rem] sm:min-w-[29rem]">
                 { open &&
                     playlists.map((playlist) => (
                         <div key={playlist.id} 
                             className="bg-white my-0.5 rounded-lg cursor-pointer flex items-center"
                         >
-                            <p className="p-5">
+                            <p className="p-3">
                                 {playlist.name}
                             </p>
                         </div>

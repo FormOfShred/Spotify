@@ -35,7 +35,7 @@ const Search: FC = (): ReactElement => {
     }
     
     return (
-        <div className="min-w-min w-6/12">
+        <div className="min-w-min w-6/12 relative">
             <form className="flex gap-5" onSubmit={handleSubmit}>
                 <input type="text" 
                     placeholder="Search for a track" 
@@ -52,9 +52,9 @@ const Search: FC = (): ReactElement => {
                 </button>
             </form>
 
-            <div className="mt-1 min-w-72">
+            <div className="absolute mt-1 min-w-72">
                 {foundTracks.map((track) => (
-                    <div key={track.id} className="bg-white rounded-lg my-0.5 flex items-center justify-between">
+                    <div key={track.id} className="bg-white rounded-lg my-0.5 gap-2 flex items-center justify-between">
                         <div className="flex items-center gap-5">
                             <img src={track.album.images[0].url} alt={track.name} className="w-20 h-20 rounded-lg" />
                             <div>

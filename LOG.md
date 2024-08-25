@@ -28,3 +28,4 @@ This is a log to keep track of what I completed and on what day I completed it. 
 - Explore Redux Saga
 - Fetch playlists on every button click?
 - Add new playlist (Redux)
+- Select playlist (playlist dropdown)
