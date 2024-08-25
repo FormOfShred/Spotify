@@ -25,7 +25,7 @@ const App: FC = (): ReactElement => {
       </div>
       <div className="flex gap-10 flex-wrap">
         <PlaylistsDropdown />
-        <p className="text-white">Description</p>
+        <p className="text-white md:w-1/3 lg:w-1/2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit esse deserunt magnam accusantium ut iste sed. Rerum repellendus magni corrupti!</p>
       </div>
     </div>
   );
