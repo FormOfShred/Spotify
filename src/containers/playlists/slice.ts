@@ -4,6 +4,7 @@ import { ErrorPayload, RequestStatus } from "../../types/requests";
 
 export interface PlaylistsState {
     playlists: Playlist[];
+    playlist?: Playlist;
     status: RequestStatus;
     error?: string;
 }
@@ -16,6 +17,7 @@ export interface PlaylistState {
 
 const initialState: PlaylistsState = {
     playlists: [],
+    playlist: undefined,
     status: RequestStatus.IDLE,
 };
 
@@ -65,10 +67,21 @@ const playlistSlice = createSlice({
             .addCase(createPlaylistFailed, (state, action) => {
                 state.status = RequestStatus.ERROR;
                 state.error = action.payload.message;
+            })
+            .addCase(getPlaylist, (state) => {
+                state.status = RequestStatus.PENDING;
+            })
+            .addCase(getPlaylistSuccess, (state, action) => {
+                state.playlist = action.payload;
+                state.status = RequestStatus.SUCCESS;
+            })
+            .addCase(getPlaylistFailed, (state, action) => {
+                state.status = RequestStatus.ERROR;
+                state.error = action.payload.message;
             });
     },
 });
 
-export const { } = playlistSlice.actions;
+export const {  } = playlistSlice.actions;
 
 export default playlistSlice.reducer;

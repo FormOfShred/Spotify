@@ -8,10 +8,8 @@ const PlaylistsDropdown: FC = (): ReactElement => {
     const [open, setOpen] = useState<boolean>(false);
 
     const playlists = useSelector(playlistSelectors.getPlaylists);
-    //const playlist = useSelector(playlistSelectors.getPlaylist);
+    const selectedPlaylist = useSelector(playlistSelectors.getSelectedPlaylist);
     const dispatch = useDispatch();
-
-    //console.log('pl', playlist)
 
     const handleDropdown = () => {
         setOpen(!open);
@@ -34,13 +32,13 @@ const PlaylistsDropdown: FC = (): ReactElement => {
         if(open) {
             dispatch(getPlaylists());
         }
-    }, [open]);
+    }, [open, dispatch]);
 
     return (
        <div>
             <div className="flex">
                 <button className="min-w-[15rem] sm:min-w-[25rem] px-5 py-2 rounded-s-lg text-white bg-green cursor-default">
-                    Choose a playlist
+                    { selectedPlaylist ? selectedPlaylist.name : "Choose a playlist" }
                 </button>
                 <button 
                     className="px-5 py-2 w-[4rem] rounded-e-lg text-white bg-green"

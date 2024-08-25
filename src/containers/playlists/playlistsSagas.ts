@@ -52,9 +52,9 @@ function* getPlaylistSaga(action: ReturnType<typeof getPlaylist>) {
             headers: { Authorization: `Bearer ${accessToken}` },
         });
         const { data } = yield call(request);
-        console.log(data);
+        console.log('data', data);
 
-        yield put(getPlaylistSuccess({} as Playlist));
+        yield put(getPlaylistSuccess(data as Playlist));
     } catch (error: any) {
         yield put(getPlaylistFailed({ message: error.message }));
     }
