@@ -18,8 +18,6 @@ const App: FC = (): ReactElement => {
   const user = useSelector(authSelectors.getUser);
   const selectedPlaylist = useSelector(playlistSelectors.getSelectedPlaylist);
 
-  console.log(selectedPlaylist);
-
   // TODO: You can access user data and now fetch user's playlists
   console.log(user);
 

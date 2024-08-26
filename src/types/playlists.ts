@@ -17,6 +17,7 @@ export interface Track {
             name: string;
             release_date: string;
         };
+        uri: string;
         
     }
 }

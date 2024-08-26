@@ -17,7 +17,6 @@ const Search: FC = (): ReactElement => {
 
         if(track.trim() === '') {
             setError(true);
-            console.log('error', error);
             setFoundTracks([]);
             return;
         }
