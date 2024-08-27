@@ -10,4 +10,5 @@ export const playlistSelectors = {
     getPlaylist: createSelector(selectPlaylistsState, (playlistsState: PlaylistsState) => playlistsState.playlist),
     getSelectedPlaylist: createSelector(selectPlaylistsState, (playlistsState: PlaylistsState) => playlistsState.playlist),
     deleteTrack: createSelector(selectPlaylistsState, (playlistsState: PlaylistsState) => playlistsState.playlist),
+    addTrack: createSelector(selectPlaylistsState, (playlistsState: PlaylistsState) => playlistsState.playlist),
 }

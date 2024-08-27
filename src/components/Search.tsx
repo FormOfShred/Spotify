@@ -6,12 +6,13 @@ import { authSelectors } from '../containers/auth/selectors';
 import searchService from '../services/search';
 import { searchSelectors } from '../containers/search/selectors';
 import { getSearchResults } from '../containers/search/slice';
+import { addTrack } from '../containers/playlists/slice';
 
 const Search: FC = (): ReactElement => {
     const [track, setTrack] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
 
-    let searchResults = useSelector(searchSelectors.getSearchResults);
+    const searchResults = useSelector(searchSelectors.getSearchResults);
     const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,6 +25,11 @@ const Search: FC = (): ReactElement => {
         }
 
         dispatch(getSearchResults(track))
+    }
+
+    const handleAddTrack = (trackUri: string) => {
+        console.log(trackUri);
+        dispatch(addTrack(trackUri));
     }
     
     return (
@@ -54,7 +60,10 @@ const Search: FC = (): ReactElement => {
                                 <p className="hidden md:block">{track.artists.map((artist: any) => artist.name).join(', ')}</p>
                             </div>
                         </div>
-                        <button className="px-5 py-2 me-2 rounded-full text-white bg-green">Add</button>
+                        <button 
+                            onClick={() => handleAddTrack(track.uri)}
+                            className="px-5 py-2 me-2 rounded-full text-white bg-green"
+                        >Add</button>
                     </div>
                 ))}
             </div>

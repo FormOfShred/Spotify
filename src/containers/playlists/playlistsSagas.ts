@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import { createPlaylist, createPlaylistFailed, createPlaylistSuccess, 
+import { addTrack, createPlaylist, createPlaylistFailed, createPlaylistSuccess, 
     deleteTrack, 
     deleteTrackFailed, 
     deleteTrackSuccess, 
@@ -79,9 +79,31 @@ function* deleteTrackSaga(action: ReturnType<typeof deleteTrack>) {
     }
 }
 
+function* addTrackSaga(action: ReturnType<typeof addTrack>) {
+    try {
+        const accessToken: string = yield select(authSelectors.getAccessToken);
+        const currentPlaylist: Playlist = yield select(playlistSelectors.getSelectedPlaylist);
+
+        console.log('currentPlaylist', currentPlaylist);
+
+        const request = () => axios.post<any>(`https://api.spotify.com/v1/playlists/${currentPlaylist.id}/tracks`, {
+            uris: [action.payload.trackUri],
+        }, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        });
+        const { data } = yield call(request);
+        console.log('data', data);
+
+        yield put(deleteTrackSuccess({} as Playlist));
+    } catch (error: any) {
+        yield put(deleteTrackFailed({ message: error.message }));
+    }
+}
+
 export default function* playlistsSaga() {
     yield takeEvery(getPlaylists.type, getPlaylistsSaga);
     yield takeEvery(createPlaylist.type, createPlaylistSaga);
     yield takeEvery(getPlaylist.type, getPlaylistSaga);
     yield takeEvery(deleteTrack.type, deleteTrackSaga);
+    yield takeEvery(addTrack.type, addTrackSaga);
 }

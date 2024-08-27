@@ -5,7 +5,6 @@ import axios from "axios";
 
 function* getSearchResultsSaga(action: ReturnType<typeof getSearchResults>) {
     try {
-        // TODO: Implement the getSearchResultsSaga
         console.log('getSearchResultsSaga');
         const accessToken: string = yield select(authSelectors.getAccessToken);
         console.log(action.payload)
@@ -19,7 +18,6 @@ function* getSearchResultsSaga(action: ReturnType<typeof getSearchResults>) {
 
         yield put(getSearchResultsSuccess(topTen as SearchResult[]));
     } catch (error: any) {
-        // TODO: Implement error handling
         yield put(getSearchResultsFailed({ message: error.message }));
     }
 }

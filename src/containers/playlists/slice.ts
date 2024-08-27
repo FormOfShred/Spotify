@@ -44,6 +44,12 @@ export const deleteTrack = createAction("playlist/deleteTrack", (playlistId: str
 export const deleteTrackSuccess = createAction<Playlist>("playlist/deleteTrackSuccess");
 export const deleteTrackFailed = createAction<ErrorPayload>("playlist/deleteTrackFailed");
 
+export const addTrack = createAction("playlist/addTrack", (trackUri: string) => ({
+    payload: { trackUri },
+}));
+export const addTrackSuccess = createAction<Playlist>("playlist/addTrackSuccess");
+export const addTrackFailed = createAction<ErrorPayload>("playlist/addTrackFailed");
+
 
 const playlistSlice = createSlice({
     name: "playlist",
@@ -95,6 +101,17 @@ const playlistSlice = createSlice({
             })
             .addCase(deleteTrackFailed, (state, action) => {
                 //state.status = RequestStatus.ERROR;
+                state.error = action.payload.message;
+            })
+            .addCase(addTrack, (state) => {
+                state.status = RequestStatus.PENDING;
+            })
+            .addCase(addTrackSuccess, (state, action) => {
+                state.playlist = action.payload;
+                state.status = RequestStatus.SUCCESS;
+            })
+            .addCase(addTrackFailed, (state, action) => {
+                state.status = RequestStatus.ERROR;
                 state.error = action.payload.message;
             });
     },

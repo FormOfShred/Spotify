@@ -22,6 +22,7 @@ export interface SearchResult {
             }
         ]
     }
+    uri: string;
 }
 
 const initialState: SearchState = {

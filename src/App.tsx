@@ -20,6 +20,8 @@ const App: FC = (): ReactElement => {
 
   // TODO: You can access user data and now fetch user's playlists
   console.log(user);
+  const accessToken = useSelector(authSelectors.getAccessToken);
+  console.log(accessToken);
 
   return (
     <div className="flex flex-col gap-10 m-10">
