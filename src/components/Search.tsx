@@ -1,36 +1,29 @@
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import {  } from '../containers/auth/slice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors } from '../containers/auth/selectors';
 
 import searchService from '../services/search';
+import { searchSelectors } from '../containers/search/selectors';
+import { getSearchResults } from '../containers/search/slice';
 
 const Search: FC = (): ReactElement => {
     const [track, setTrack] = useState<string>('');
-    const [foundTracks, setFoundTracks] = useState<any[]>([]);
     const [error, setError] = useState<boolean>(false);
 
-    const accessToken = useSelector(authSelectors.getAccessToken);
+    let searchResults = useSelector(searchSelectors.getSearchResults);
+    const dispatch = useDispatch();
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if(track.trim() === '') {
             setError(true);
-            setFoundTracks([]);
+            setTrack('');
             return;
         }
 
-        const response = await searchService.searchTracks(track, accessToken);
-
-        if(response.error) {
-            console.log('error', response.error);
-            setFoundTracks([]);
-        } else {
-            setError(false);
-            console.log('response', response);
-            setFoundTracks(response.tracks.items.slice(0, 5));
-        }
+        dispatch(getSearchResults(track))
     }
     
     return (
@@ -52,7 +45,7 @@ const Search: FC = (): ReactElement => {
             </form>
 
             <div className="absolute mt-1 min-w-72 z-20">
-                {foundTracks.map((track) => (
+                {searchResults.map((track) => (
                     <div key={track.id} className="bg-white rounded-lg my-0.5 gap-2 flex items-center justify-between">
                         <div className="flex items-center gap-5">
                             <img src={track.album.images[0].url} alt={track.name} className="w-20 h-20 rounded-lg" />

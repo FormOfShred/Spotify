@@ -66,8 +66,6 @@ function* getPlaylistSaga(action: ReturnType<typeof getPlaylist>) {
 function* deleteTrackSaga(action: ReturnType<typeof deleteTrack>) {
     try {
         const accessToken: string = yield select(authSelectors.getAccessToken);
-        console.log(action.payload.trackUri)
-        console.log(accessToken)
 
         const request = () => axios.delete<any>(`https://api.spotify.com/v1/playlists/${action.payload.playlistId}/tracks`, {
             headers: { Authorization: `Bearer ${accessToken}` },

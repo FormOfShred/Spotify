@@ -6,6 +6,12 @@ This is a log to keep track of what I completed and on what day I completed it. 
  - Error UI
  - Confirmation toast
 
+## Questions
+
+- Chosen playlist gone on refresh?
+- Delete track immediately visible?
+- General redux overview
+
 ## 23/08
 
 - I set up the environment and ran the application to see if I set it up properly.
@@ -29,3 +35,12 @@ This is a log to keep track of what I completed and on what day I completed it. 
 - Fetch playlists on every button click?
 - Add new playlist (Redux)
 - Select playlist (playlist dropdown)
+
+## 26/08
+
+- Delete track from playlist
+- Delete track immediately visible? how? refresh? redux?
+
+## 27/08
+
+- Search (Reudx)
