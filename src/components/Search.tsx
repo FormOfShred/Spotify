@@ -7,18 +7,22 @@ import searchService from '../services/search';
 import { searchSelectors } from '../containers/search/selectors';
 import { getSearchResults, resetSearchResults } from '../containers/search/slice';
 import { addTrack } from '../containers/playlists/slice';
+import { playlistSelectors } from '../containers/playlists/selectors';
 
 const Search: FC = (): ReactElement => {
     const [track, setTrack] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
+    const [noPlaylistError, setNoPlaylistError] = useState<boolean>(false);
 
     const searchResults = useSelector(searchSelectors.getSearchResults);
+    const currentPlaylist = useSelector(playlistSelectors.getPlaylist);
     const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if(track.trim() === '') {
+            setNoPlaylistError(false);
             setError(true);
             setTrack('');
             return;
@@ -28,12 +32,17 @@ const Search: FC = (): ReactElement => {
     }
 
     const resetSearchInput = () => {
+        setNoPlaylistError(false);
         setTrack('');
         setError(false);
         dispatch(resetSearchResults());
     }
 
     const handleAddTrack = (trackUri: string) => {
+        if(!currentPlaylist) {
+            setNoPlaylistError(true);
+            return;
+        }
         console.log(trackUri);
         dispatch(addTrack(trackUri));
     }
@@ -67,6 +76,7 @@ const Search: FC = (): ReactElement => {
                     Search
                 </button>
             </form>
+            {noPlaylistError && <p className="text-red">Please select a playlist</p>}
 
             <div className="absolute mt-1 min-w-72 z-20">
                 {searchResults.map((track) => (
