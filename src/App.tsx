@@ -11,17 +11,33 @@ import Search from "./components/Search";
 import AddPlaylistButton from "./components/AddPlaylistButton";
 import PlaylistsDropdown from "./components/PlaylistsDropdown";
 import TrackList from "./components/TrackList";
+import { getPlaylist, getPlaylists } from "./containers/playlists/slice";
 
 
 const App: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const user = useSelector(authSelectors.getUser);
   const selectedPlaylist = useSelector(playlistSelectors.getSelectedPlaylist);
+  const playlists = useSelector(playlistSelectors.getPlaylists);
 
   // TODO: You can access user data and now fetch user's playlists
   console.log(user);
   const accessToken = useSelector(authSelectors.getAccessToken);
   console.log(accessToken);
+
+  useEffect(() => {
+    if (user && accessToken) {
+      dispatch(getPlaylists());
+    }
+    console.log(playlists);
+  }, [dispatch, accessToken, user]);
+
+  useEffect(() => {
+    if(playlists.length > 0) {
+      dispatch(getPlaylist(playlists[0].id!));
+    }
+    console.log(selectedPlaylist);
+  }, [playlists, dispatch]);
 
   return (
     <div className="flex flex-col gap-10 m-10">

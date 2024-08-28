@@ -28,11 +28,6 @@ const PlaylistsDropdown: FC = (): ReactElement => {
         }
     }
 
-    useEffect(() => {
-        dispatch(getPlaylists());
-        console.log("PlaylistsDropdown mounted")
-    }, [open, dispatch]);
-
     return (
        <div>
             <div className="flex">
@@ -58,7 +53,8 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                 { open &&
                     playlists.map((playlist) => (
                         <div key={playlist.id} 
-                            className="bg-white my-0.5 rounded-lg cursor-pointer flex items-center"
+                            className="bg-white my-0.5 rounded-lg cursor-pointer flex items-center
+                                hover:bg-green hover:text-white border-2 border-green"
                             onClick={() => handleChoosePlaylist(playlist)}
                         >
                             <p className="p-3">
