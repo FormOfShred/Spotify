@@ -5,7 +5,7 @@ import { authSelectors } from '../containers/auth/selectors';
 
 import searchService from '../services/search';
 import { searchSelectors } from '../containers/search/selectors';
-import { getSearchResults } from '../containers/search/slice';
+import { getSearchResults, resetSearchResults } from '../containers/search/slice';
 import { addTrack } from '../containers/playlists/slice';
 
 const Search: FC = (): ReactElement => {
@@ -27,6 +27,12 @@ const Search: FC = (): ReactElement => {
         dispatch(getSearchResults(track))
     }
 
+    const resetSearchInput = () => {
+        setTrack('');
+        setError(false);
+        dispatch(resetSearchResults());
+    }
+
     const handleAddTrack = (trackUri: string) => {
         console.log(trackUri);
         dispatch(addTrack(trackUri));
@@ -34,19 +40,31 @@ const Search: FC = (): ReactElement => {
     
     return (
         <div className="min-w-min w-6/12 relative">
-            <form className="flex gap-5" onSubmit={handleSubmit}>
-                <input type="text" 
-                    placeholder="Search for a track" 
-                    className={"min-w-48 md:min-w-96 w-4/5 ps-3 rounded-lg border" + (error ? ' border-red' : '')}
-                    value={track}
-                    onChange={(event) => setTrack(event.target.value)}
-                    
-                >
-                </input>
-                <button type="submit" 
+            <form className="flex gap-5 items-center" onSubmit={handleSubmit}>
+                <div className="relative w-4/5">
+                    <input
+                        type="text"
+                        placeholder="Search for a track"
+                        className={
+                            "min-w-48 md:min-w-96 w-full ps-3 pr-8 rounded-lg border h-10" +
+                            (error ? ' border-red' : '')
+                        }
+                        value={track}
+                        onChange={(event) => setTrack(event.target.value)}
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500"
+                        onClick={resetSearchInput}
+                    >
+                        ✕
+                    </button>
+                </div>
+                <button
+                    type="submit"
                     className="px-5 py-2 rounded-lg text-white bg-green"
                 >
-                        Search
+                    Search
                 </button>
             </form>
 

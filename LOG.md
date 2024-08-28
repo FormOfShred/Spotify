@@ -45,3 +45,7 @@ This is a log to keep track of what I completed and on what day I completed it. 
 
 - Search (Reudx)
 - Add track to playlist
+
+## 28/08
+
+- Reset search results

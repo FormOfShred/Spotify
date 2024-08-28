@@ -41,6 +41,9 @@ const searchSlice = createSlice({
     name: "search",
     initialState,
     reducers: {
+        resetSearchResults(state) {
+            state.searchResults = [];
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -57,5 +60,7 @@ const searchSlice = createSlice({
             });
     },
 });
+
+export const { resetSearchResults } = searchSlice.actions;
 
 export default searchSlice.reducer;
