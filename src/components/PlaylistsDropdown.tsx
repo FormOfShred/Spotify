@@ -14,9 +14,9 @@ const PlaylistsDropdown: FC = (): ReactElement => {
     const handleDropdown = () => {
         setOpen(!open);
 
-        if(!open) {
+        /*if(!open) {
             dispatch(getPlaylists());
-        }
+        }*/
         
     }
 
@@ -29,9 +29,8 @@ const PlaylistsDropdown: FC = (): ReactElement => {
     }
 
     useEffect(() => {
-        if(open) {
-            dispatch(getPlaylists());
-        }
+        dispatch(getPlaylists());
+        console.log("PlaylistsDropdown mounted")
     }, [open, dispatch]);
 
     return (

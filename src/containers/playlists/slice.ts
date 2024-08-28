@@ -74,6 +74,7 @@ const playlistSlice = createSlice({
             })
             .addCase(createPlaylistSuccess, (state, action) => {
                 state.playlists.push(action.payload);
+                console.log(action.payload)
                 state.status = RequestStatus.SUCCESS;
             })
             .addCase(createPlaylistFailed, (state, action) => {

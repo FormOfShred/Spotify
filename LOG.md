@@ -49,3 +49,4 @@ This is a log to keep track of what I completed and on what day I completed it. 
 ## 28/08
 
 - Reset search results
+- Added playlist is added to playlists (in redux store)

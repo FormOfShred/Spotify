@@ -41,8 +41,9 @@ function* createPlaylistSaga(action: ReturnType<typeof createPlaylist>) {
             headers: { Authorization: `Bearer ${accessToken}` },
         });
         const { data } = yield call(request);
+        console.log(data)
 
-        yield put(createPlaylistSuccess(data.item as Playlist));
+        yield put(createPlaylistSuccess(data as Playlist));
     } catch (error: any) {
         yield put(createPlaylistFailed({ message: error.message }));
     }
