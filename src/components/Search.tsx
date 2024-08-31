@@ -43,7 +43,6 @@ const Search: FC = (): ReactElement => {
             setNoPlaylistError(true);
             return;
         }
-        console.log(trackUri);
         dispatch(addTrack(trackUri));
     }
     
@@ -80,7 +79,8 @@ const Search: FC = (): ReactElement => {
 
             <div className="absolute mt-1 min-w-72 z-20">
                 {searchResults.map((track) => (
-                    <div key={track.id} className="bg-white rounded-lg my-0.5 gap-2 flex items-center justify-between">
+                    <div key={track.id} className="bg-white rounded-lg my-0.5 gap-2 flex 
+                        items-center justify-between border border-green">
                         <div className="flex items-center gap-5">
                             <img src={track.album.images[0].url} alt={track.name} className="w-20 h-20 rounded-lg" />
                             <div>

@@ -13,10 +13,6 @@ const PlaylistsDropdown: FC = (): ReactElement => {
 
     const handleDropdown = () => {
         setOpen(!open);
-
-        /*if(!open) {
-            dispatch(getPlaylists());
-        }*/
         
     }
 

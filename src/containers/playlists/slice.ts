@@ -55,6 +55,7 @@ const playlistSlice = createSlice({
     name: "playlist",
     initialState,
     reducers: {
+        
     },
     extraReducers: (builder) => {
         builder
@@ -74,7 +75,6 @@ const playlistSlice = createSlice({
             })
             .addCase(createPlaylistSuccess, (state, action) => {
                 state.playlists.push(action.payload);
-                console.log(action.payload)
                 state.status = RequestStatus.SUCCESS;
             })
             .addCase(createPlaylistFailed, (state, action) => {
@@ -96,8 +96,6 @@ const playlistSlice = createSlice({
                 state.status = RequestStatus.PENDING;
             })
             .addCase(deleteTrackSuccess, (state, action) => {
-                console.log('action payload', action.payload)
-                //state.playlist = action.payload;
                 state.status = RequestStatus.SUCCESS;
             })
             .addCase(deleteTrackFailed, (state, action) => {

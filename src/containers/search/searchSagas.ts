@@ -5,9 +5,7 @@ import axios from "axios";
 
 function* getSearchResultsSaga(action: ReturnType<typeof getSearchResults>) {
     try {
-        console.log('getSearchResultsSaga');
         const accessToken: string = yield select(authSelectors.getAccessToken);
-        console.log(action.payload)
 
         const request = () => axios.get<any>(`https://api.spotify.com/v1/search?q=${action.payload.query}&type=track`, {
             headers: { Authorization: `Bearer ${accessToken}` },

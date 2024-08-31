@@ -39,6 +39,7 @@ const App: FC = (): ReactElement => {
     console.log(selectedPlaylist);
   }, [playlists, dispatch]);
 
+
   return (
     <div className="flex flex-col gap-10 m-10">
       <div className="flex justify-between flex-wrap gap-3">
