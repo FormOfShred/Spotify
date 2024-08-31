@@ -54,7 +54,7 @@ const App: FC = (): ReactElement => {
         </div>
         <div className="flex gap-10 flex-wrap">
           <PlaylistsDropdown />
-          <p className="text-white dark:text-black md:w-1/3 lg:w-1/2">{selectedPlaylist?.description}</p>
+          <p className="text-black dark:text-white md:w-1/3 lg:w-1/2">{selectedPlaylist?.description}</p>
         </div>
         <TrackList />
       </div>

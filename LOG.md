@@ -71,3 +71,4 @@ addtrack -> fetch playlist -> playlist updated
 ## 31/08
 
 - Finish up automatic update of playlist (without refresh)
+- Dark/light mode
