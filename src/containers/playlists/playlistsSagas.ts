@@ -73,9 +73,8 @@ function* deleteTrackSaga(action: ReturnType<typeof deleteTrack>) {
             data: { tracks: [{ uri: action.payload.trackUri }] },
         });
         yield call(request);
-        const { data } = yield call(request);
 
-        //yield put(deleteTrackSuccess(data as Playlist));
+        yield put(getPlaylist(action.payload.playlistId!));
     } catch (error: any) {
         yield put(deleteTrackFailed({ message: error.message }));
     }
@@ -91,11 +90,8 @@ function* addTrackSaga(action: ReturnType<typeof addTrack>) {
         }, {
             headers: { Authorization: `Bearer ${accessToken}` },
         });
-        const { data } = yield call(request);
 
-        console.log(currentPlaylist.tracks!.items)
-
-        //yield put(addTrackSucces({} as Playlist));
+        yield put(getPlaylist(currentPlaylist.id!));
     } catch (error: any) {
         yield put(addTrackFailed({ message: error.message }));
     }

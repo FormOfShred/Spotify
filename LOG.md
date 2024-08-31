@@ -15,9 +15,9 @@ This is a log to keep track of what I completed and on what day I completed it. 
 ## Meeting notes
 
 switching: no saga needed
- - redux: keep state of applicaton -< what is playlist? what is track?
+ - redux: keep state of applicaton -> what is playlist? what is track?
  - ex. save redux -> refresh keep state the same
- - side-effect in addition to redux -< load list of tracks -> getplaylistsaga good example
+ - side-effect in addition to redux -> load list of tracks -> getplaylistsaga good example
  - switch between playlist -> already gave list of all playlists fetch list of playlists -> click on paylist -> no request needed -> just know that the switch happened (by id) -> no saga needed
  
 addtrack -> fetch playlist -> playlist updated
@@ -68,3 +68,7 @@ addtrack -> fetch playlist -> playlist updated
 
 - Meeting (feedback + questions)
 - Figure out refresh of tracklist
+
+## 31/08
+
+- Finish up automatic update of playlist (without refresh)
