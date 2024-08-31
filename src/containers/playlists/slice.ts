@@ -95,11 +95,11 @@ const playlistSlice = createSlice({
             .addCase(deleteTrack, (state) => {
                 state.status = RequestStatus.PENDING;
             })
-            .addCase(deleteTrackSuccess, (state, action) => {
+            .addCase(deleteTrackSuccess, (state) => {
                 state.status = RequestStatus.SUCCESS;
             })
             .addCase(deleteTrackFailed, (state, action) => {
-                //state.status = RequestStatus.ERROR;
+                state.status = RequestStatus.ERROR;
                 state.error = action.payload.message;
             })
             .addCase(addTrack, (state) => {

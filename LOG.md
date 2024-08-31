@@ -3,7 +3,6 @@
 This is a log to keep track of what I completed and on what day I completed it. It's also a way for me to keep track of any issues I may come across
 
 ## TODO
- - Error UI
  - Confirmation toast
 
 ## Questions
