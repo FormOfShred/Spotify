@@ -12,17 +12,18 @@ import { playlistSelectors } from '../containers/playlists/selectors';
 const Search: FC = (): ReactElement => {
     const [track, setTrack] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
-    const [noPlaylistError, setNoPlaylistError] = useState<boolean>(false);
+    const [playlistError, setPlaylistError] = useState<string>('');
 
     const searchResults = useSelector(searchSelectors.getSearchResults);
     const currentPlaylist = useSelector(playlistSelectors.getPlaylist);
+    const user = useSelector(authSelectors.getUser);
     const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if(track.trim() === '') {
-            setNoPlaylistError(false);
+            setPlaylistError('');
             setError(true);
             setTrack('');
             return;
@@ -32,15 +33,23 @@ const Search: FC = (): ReactElement => {
     }
 
     const resetSearchInput = () => {
-        setNoPlaylistError(false);
+        setPlaylistError('');
         setTrack('');
         setError(false);
         dispatch(resetSearchResults());
     }
 
     const handleAddTrack = (trackUri: string) => {
+        console.log(user!.userName, currentPlaylist?.owner.display_name)
+        console.log(user!.userName != currentPlaylist?.owner.display_name)
+        console.log(currentPlaylist)
+        if(user!.userName != currentPlaylist?.owner.display_name) {
+            setPlaylistError('You can only add tracks to your own playlists');
+            return
+        }
+
         if(!currentPlaylist) {
-            setNoPlaylistError(true);
+            setPlaylistError('Please select a playlist');
             return;
         }
         dispatch(addTrack(trackUri));
@@ -75,7 +84,7 @@ const Search: FC = (): ReactElement => {
                     Search
                 </button>
             </form>
-            {noPlaylistError && <p className="text-red">Please select a playlist</p>}
+            {playlistError && <p className="text-red mt-1">{playlistError}</p>}
 
             <div className="absolute mt-1 min-w-72 z-20">
                 {searchResults.map((track) => (

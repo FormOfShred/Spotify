@@ -5,6 +5,9 @@ export interface Playlist {
     tracks?: {
         items: Track[];
     };
+    owner: {
+        display_name: string;
+    }; 
 }
 
 export interface Track {
