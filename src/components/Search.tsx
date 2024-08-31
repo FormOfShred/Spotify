@@ -63,7 +63,7 @@ const Search: FC = (): ReactElement => {
                         type="text"
                         placeholder="Search for a track"
                         className={
-                            "min-w-48 md:min-w-96 w-full ps-3 pr-8 rounded-lg border h-10" +
+                            "min-w-48 md:min-w-96 w-full ps-3 pr-8 rounded-lg border h-10 bg-black text-white dark:bg-white dark:text-black" +
                             (error ? ' border-red' : '')
                         }
                         value={track}
@@ -71,7 +71,7 @@ const Search: FC = (): ReactElement => {
                     />
                     <button
                         type="button"
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 text-white dark:text-black"
                         onClick={resetSearchInput}
                     >
                         ✕

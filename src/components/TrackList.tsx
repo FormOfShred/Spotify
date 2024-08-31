@@ -21,7 +21,7 @@ const TrackList: FC = (): ReactElement => {
                 return (
                     <div
                     key={track.id}
-                    className="bg-white p-5 rounded-lg shadow-md flex justify-between items-center"
+                    className="bg-black text-white dark:bg-white dark:text-black p-5 rounded-lg shadow-md flex justify-between items-center"
                     >
                     <div className="flex gap-10 items-center flex-wrap">
                         <img src={track.album.images[0].url} alt={track.name} className="w-20 h-20 rounded-lg" />

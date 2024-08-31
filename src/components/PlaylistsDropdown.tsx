@@ -45,7 +45,7 @@ const PlaylistsDropdown: FC = (): ReactElement => {
                     }
                 </button>
             </div>
-            <div className="mt-1 absolute min-w-[19rem] sm:min-w-[29rem] z-10">
+            <div className="mt-1 absolute min-w-[19rem] sm:min-w-[29rem] z-10 ">
                 { open &&
                     playlists.map((playlist) => (
                         <div key={playlist.id} 
