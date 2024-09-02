@@ -40,9 +40,6 @@ const Search: FC = (): ReactElement => {
     }
 
     const handleAddTrack = (trackUri: string) => {
-        console.log(user!.userName, currentPlaylist?.owner.display_name)
-        console.log(user!.userName != currentPlaylist?.owner.display_name)
-        console.log(currentPlaylist)
         if(user!.userName != currentPlaylist?.owner.display_name) {
             setPlaylistError('You can only add tracks to your own playlists');
             return

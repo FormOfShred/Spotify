@@ -21,25 +21,18 @@ const App: FC = (): ReactElement => {
   const selectedPlaylist = useSelector(playlistSelectors.getSelectedPlaylist);
   const playlists = useSelector(playlistSelectors.getPlaylists);
   const darkMode = useSelector(darkModeSelectors.getDarkMode);
-
-  // TODO: You can access user data and now fetch user's playlists
-  console.log(user);
   const accessToken = useSelector(authSelectors.getAccessToken);
-  console.log(accessToken);
-  console.log(darkMode);
 
   useEffect(() => {
     if (user && accessToken) {
       dispatch(getPlaylists());
     }
-    console.log(playlists);
   }, [dispatch, accessToken, user]);
 
   useEffect(() => {
     if(playlists.length > 0) {
       dispatch(getPlaylist(playlists[0].id!));
     }
-    console.log(selectedPlaylist);
   }, [playlists, dispatch]);
 
   return (
