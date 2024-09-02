@@ -1,9 +1,8 @@
-import { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import {  } from '../containers/auth/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors } from '../containers/auth/selectors';
 
-import searchService from '../services/search';
 import { searchSelectors } from '../containers/search/selectors';
 import { getSearchResults, resetSearchResults } from '../containers/search/slice';
 import { addTrack } from '../containers/playlists/slice';
@@ -40,7 +39,7 @@ const Search: FC = (): ReactElement => {
     }
 
     const handleAddTrack = (trackUri: string) => {
-        if(user!.userName != currentPlaylist?.owner.display_name) {
+        if(user!.userName !== currentPlaylist?.owner.display_name) {
             setPlaylistError('You can only add tracks to your own playlists');
             return
         }
