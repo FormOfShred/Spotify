@@ -90,6 +90,7 @@ function* addTrackSaga(action: ReturnType<typeof addTrack>) {
         }, {
             headers: { Authorization: `Bearer ${accessToken}` },
         });
+        yield call(request);
 
         yield put(getPlaylist(currentPlaylist.id!));
     } catch (error: any) {
