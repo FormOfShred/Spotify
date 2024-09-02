@@ -1,5 +1,4 @@
 import { FC, ReactElement, useState } from 'react';
-import {  } from '../containers/auth/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors } from '../containers/auth/selectors';
 

@@ -1,7 +1,7 @@
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { playlistSelectors } from "../containers/playlists/selectors";
-import { getPlaylists, getPlaylist } from "../containers/playlists/slice";
+import { getPlaylist } from "../containers/playlists/slice";
 import { Playlist } from "../types/playlists";
 
 const PlaylistsDropdown: FC = (): ReactElement => {
