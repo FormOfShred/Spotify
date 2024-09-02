@@ -50,6 +50,8 @@ const Search: FC = (): ReactElement => {
             return;
         }
         dispatch(addTrack(trackUri));
+
+        resetSearchInput();
     }
     
     return (
@@ -83,7 +85,7 @@ const Search: FC = (): ReactElement => {
             </form>
             {playlistError && <p className="text-red mt-1">{playlistError}</p>}
 
-            <div className="absolute mt-1 lg:min-w-[40rem] z-20">
+            <div className="absolute mt-1 md:w-3/4 z-20">
                 {searchResults.map((track) => (
                     <div key={track.id} className="bg-white rounded-lg my-0.5 gap-2 flex 
                         items-center justify-between border border-green">
